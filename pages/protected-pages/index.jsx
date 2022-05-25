@@ -1,7 +1,17 @@
 import styles from "./../../styles/Home.module.css";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSession } from "@clerk/nextjs";
 
 const ProtectedPage = () => {
+  const { getToken } = useSession();
+  const fetchToken = async () => {
+    const token = await getToken({ template: "hasura" });
+    console.log(token);
+  };
+  useEffect(() => {
+    fetchToken().then(r => {
+    });
+  }, []);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
